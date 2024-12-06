@@ -1,0 +1,45 @@
+#include <iostream>
+
+int main() {
+    int N;
+    std::cout << "Введіть тризначне додатнє число N: ";
+    std::cin >> N;
+
+    // Перевірка, чи N є тризначним
+    if (N < 100 || N > 999) {
+        std::cout << "Число повинно бути тризначним і додатнім!\n";
+        return 1; // Завершення програми
+    }
+
+    // Розклад числа на цифри
+    int hundreds = N / 100;       // Сотні
+    int tens = (N / 10) % 10;     // Десятки
+    int units = N % 10;           // Одиниці
+
+    // Знаходження добутку непарних цифр
+    int product = 1;
+    bool hasOdd = false; // Флаг для перевірки наявності непарних цифр
+
+    if (hundreds % 2 != 0) { // Якщо сотні непарні
+        product *= hundreds;
+        hasOdd = true;
+    }
+
+    if (tens % 2 != 0) { // Якщо десятки непарні
+        product *= tens;
+        hasOdd = true;
+    }
+
+    if (units % 2 != 0) { // Якщо одиниці непарні
+        product *= units;
+        hasOdd = true;
+    }
+
+    if (hasOdd) {
+        std::cout << "Добуток непарних цифр числа " << N << " дорівнює: " << product << "\n";
+    } else {
+        std::cout << "Число " << N << " не містить непарних цифр.\n";
+    }
+
+    return 0;
+}
