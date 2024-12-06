@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cmath>
+#include <limits>
+
+double calculate_y(double x) {
+    if (x >= 0) {
+        return exp(-x + 2);
+    } else {
+        double denominator = x + 3.2;
+        if (denominator == 0) {
+            // Обробка випадку ділення на нуль
+            return std::numeric_limits<double>::infinity();
+        }
+        return exp(-x) * sin(1 / denominator);
+    }
+}
+
+int main() {
+    double x;
+    std::cout << "Введіть значення x: ";
+    std::cin >> x;
+
+    double y = calculate_y(x);
+    std::cout << "Результат: y = " << y << std::endl;
+
+    return 0;
+}
