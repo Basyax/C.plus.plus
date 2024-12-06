@@ -1,0 +1,23 @@
+#include <iostream>
+
+int main() {
+    int month;
+    std::cout << "Введіть номер місяця (1-12): ";
+    std::cin >> month;
+
+    switch (month) {
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            std::cout << "У цьому місяці 31 день.\n";
+            break;
+        case 4: case 6: case 9: case 11:
+            std::cout << "У цьому місяці 30 днів.\n";
+            break;
+        case 2:
+            std::cout << "У цьому місяці 28 або 29 днів (в залежності від року).\n";
+            break;
+        default:
+            std::cout << "Помилка: введіть номер місяця від 1 до 12.\n";
+    }
+
+    return 0;
+}
