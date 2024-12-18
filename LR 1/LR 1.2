@@ -4,16 +4,14 @@
 using namespace std;
 
 int main() {
-    // Вхідні дані
+    
     double a = 2.0, b = 13.17;
 
-    // Перевірка області визначення логарифма
     if (b == 0 || a == 0) {
         cout << "Помилка: ділення на нуль неможливе." << endl;
         return 1;
     }
 
-    // Перевірка підлогарифмічного виразу
     double cos_term = (1 - cos((a / b) * M_PI)) / (1 + cos((a / b) * M_PI));
     double sin_term = (1 - sin((b / a) * M_PI)) / (1 + sin((b / a) * M_PI));
     if (cos_term <= 0 || sin_term <= 0) {
@@ -21,14 +19,11 @@ int main() {
         return 1;
     }
 
-    // Обчислення піднесень до степеня
-    double exp1 = exp(0.5 * log(cos_term)); // e^(0.5 * ln(cos_term))
-    double exp2 = exp(0.3 * log(sin_term)); // e^(0.3 * ln(sin_term))
+    double exp1 = exp(0.5 * log(cos_term)); 
+    double exp2 = exp(0.3 * log(sin_term)); 
 
-    // Обчислення кореня e-го степеня
     double result = pow(M_E, (exp1 + exp2) / M_E);
 
-    // Виведення результату
     cout << "Значення y: " << result << endl;
 
     return 0;
