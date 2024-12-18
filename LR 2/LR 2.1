@@ -8,7 +8,6 @@ double calculate_y(double x) {
     } else {
         double denominator = x + 3.2;
         if (denominator == 0) {
-            // Обробка випадку ділення на нуль
             return std::numeric_limits<double>::infinity();
         }
         return exp(-x) * sin(1 / denominator);
