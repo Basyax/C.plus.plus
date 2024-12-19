@@ -1,28 +1,28 @@
-#include <iostream>
-#include <cmath>
+#include <iostream>  // Підключення бібліотеки для вводу/виводу (cout, cin)
+#include <cmath>     // Підключення бібліотеки для математичних операцій (pow, sin, cos, log, cbrt, M_PI)
 
-using namespace std;
+using namespace std;  // Використовуємо стандартний простір імен для спрощення доступу до стандартних функцій (наприклад, cout)
 
-int main() {
+int main() {  // Оголошення головної функції програми
 
-    double a = 3.0, b = 0.501;
+    double a = 3.0, b = 0.501;  // Оголошення змінних типу double (з плаваючою комою) та ініціалізація їх значеннями
 
-    if (a - b <= 0) {
-        cout << endl;
-        return 1; 
+    if (a - b <= 0) {  // Якщо різниця між a та b менша або дорівнює нулю
+        cout << endl;  // Вивести порожній рядок на екран
+        return 1;  // Вийти з програми з кодом завершення 1, що означає помилку або незадовільний результат
     }
 
-    double part1 = pow((a - b), 2);
-    double part2 = sin((1 - a / b) * M_PI / 3);
-    double part3 = cos((1 - b / a) * M_PI / 3);
+    double part1 = pow((a - b), 2);  // Обчислення квадрата різниці між a та b (піднесення до степеня 2)
+    double part2 = sin((1 - a / b) * M_PI / 3);  // Обчислення синуса виразу (1 - a / b) * M_PI / 3, де M_PI — це значення числа π
+    double part3 = cos((1 - b / a) * M_PI / 3);  // Обчислення косинуса виразу (1 - b / a) * M_PI / 3
 
-    double numerator = cbrt(part1 * pow(part2, 2) * pow(part3, 2)); 
+    double numerator = cbrt(part1 * pow(part2, 2) * pow(part3, 2));  // Обчислення чисельника формули: кубічний корінь з (part1 * part2^2 * part3^2)
 
-    double denominator = 0.701 * pow(log(a - b), 2); 
+    double denominator = 0.701 * pow(log(a - b), 2);  // Обчислення знаменника формули: 0.701 помножити на квадрат натурального логарифма різниці (a - b)
 
-    double y = numerator / denominator;
+    double y = numerator / denominator;  // Обчислення значення y, яке є результатом ділення чисельника на знаменник
 
-    cout << "Значення y: " << y << endl;
+    cout << "Значення y: " << y << endl;  // Виведення на екран значення y з відповідним повідомленням
 
-    return 0;
+    return 0;  // Повернення 0 з функції main, що означає успішне завершення програми
 }
