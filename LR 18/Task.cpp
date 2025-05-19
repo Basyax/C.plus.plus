@@ -22,7 +22,7 @@ void increment(int &var) {
 void increment(int &var, int expr) {
     var = var + expr;  // Збільшуємо значення змінної var на значення expr
 }
-
+// Головна функція програми — точка входу
 int main(void) {
     int var = 0;  // Оголошуємо змінну var і присвоюємо їй початкове значення 0
 
