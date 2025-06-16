@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+// --- AdHocSquare: обчислює площу на запит ---
+class AdHocSquare {
+public:
+    AdHocSquare(double side);
+    void set_side(double side);
+    double get_area();
+
+private:
+    double side;
+};
+
+AdHocSquare::AdHocSquare(double side) {
+    this->side = side;
+}
+
+void AdHocSquare::set_side(double side) {
+    this->side = side;
+}
+
+double AdHocSquare::get_area() {
+    return side * side;
+}
+
+// --- LazySquare: обчислює площу тільки коли потрібно ---
+class LazySquare {
+public:
+    LazySquare(double side);
+    void set_side(double side);
+    double get_area();
+
+private:
+    double side;
+    double area;
+    bool side_changed;
+};
+
+LazySquare::LazySquare(double side) {
+    this->side = side;
+    this->area = side * side;
+    this->side_changed = false;
+}
+
+void LazySquare::set_side(double side) {
+    this->side = side;
+    this->side_changed = true;
+}
+
+double LazySquare::get_area() {
+    if (side_changed) {
+        area = side * side;
+        side_changed = false;
+    }
+    return area;
+}
+
+// --- Тестування ---
+int main() {
+    cout << "Testing AdHocSquare:" << endl;
+    AdHocSquare a(5);
+    cout << "Area: " << a.get_area() << endl;
+    a.set_side(10);
+    cout << "Area: " << a.get_area() << endl;
+
+    cout << "\nTesting LazySquare:" << endl;
+    LazySquare l(5);
+    cout << "Area: " << l.get_area() << endl;
+    l.set_side(10);
+    cout << "Area: " << l.get_area() << endl;
+    cout << "Area again (should NOT recalculate): " << l.get_area() << endl;
+
+    return 0;
+}
