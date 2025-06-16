@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person
+{
+public:
+    string name;
+    int age;
+    string gender;
+    string city;
+    // Можна додати ще, наприклад: string occupation;
+};
+
+void print(Person* person)
+{
+    cout << person->name << " is " << person->age << " years old" << endl;
+    cout << "Gender: " << person->gender << endl;
+    cout << "City: " << person->city << endl;
+}
+
+int main()
+{
+    Person person;
+    person.name = "Harry";
+    person.age = 23;
+    person.gender = "Male";
+    person.city = "London";
+
+    cout << "Meet " << person.name << "!" << endl;
+    print(&person);
+
+    // Створимо ще одну особу
+    Person person2;
+    person2.name = "Emma";
+    person2.age = 30;
+    person2.gender = "Female";
+    person2.city = "New York";
+
+    cout << "\nMeet " << person2.name << "!" << endl;
+    print(&person2);
+
+    return 0;
+}
