@@ -1,0 +1,100 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class FlightBooking {
+public:
+    FlightBooking(int id, int capacity, int reserved);
+    void printStatus();
+    bool reserveSeats(int number_of_seats);
+    bool cancelReservations(int number_of_seats);
+
+private:
+    int id;
+    int capacity;
+    int reserved;
+    int maxReservation(); // 105% від capacity
+};
+
+// --- Конструктор ---
+FlightBooking::FlightBooking(int id, int capacity, int reserved) {
+    this->id = id;
+    this->capacity = capacity;
+
+    if (reserved < 0)
+        this->reserved = 0;
+    else if (reserved > maxReservation())
+        this->reserved = maxReservation();
+    else
+        this->reserved = reserved;
+}
+
+// --- Допоміжна функція для 105% ---
+int FlightBooking::maxReservation() {
+    return static_cast<int>(capacity * 1.05 + 0.5); // округлення
+}
+
+// --- Метод виводу ---
+void FlightBooking::printStatus() {
+    int percentage = (reserved * 100) / capacity;
+    cout << "Flight " << id << " : " << reserved << "/" << capacity
+         << " (" << percentage << "%) seats reserved" << endl;
+}
+
+// --- Спроба зарезервувати місця ---
+bool FlightBooking::reserveSeats(int number_of_seats) {
+    if (number_of_seats < 0)
+        return false;
+    if (reserved + number_of_seats > maxReservation())
+        return false;
+
+    reserved += number_of_seats;
+    return true;
+}
+
+// --- Спроба скасувати місця ---
+bool FlightBooking::cancelReservations(int number_of_seats) {
+    if (number_of_seats < 0 || reserved - number_of_seats < 0)
+        return false;
+
+    reserved -= number_of_seats;
+    return true;
+}
+
+// --- Основна програма ---
+int main() {
+    int reserved = 0, capacity = 0;
+    cout << "Provide flight capacity: ";
+    cin >> capacity;
+    cout << "Provide number of reserved seats: ";
+    cin >> reserved;
+    cin.ignore(); // очищення буфера після cin
+
+    FlightBooking booking(1, capacity, reserved);
+
+    string command;
+    while (true) {
+        booking.printStatus();
+        cout << "What would you like to do?: ";
+        getline(cin, command);
+
+        if (command == "quit")
+            break;
+
+        if (command.rfind("add ", 0) == 0) {
+            int n = stoi(command.substr(4));
+            if (!booking.reserveSeats(n))
+                cout << "Cannot perform this operation" << endl;
+        }
+        else if (command.rfind("cancel ", 0) == 0) {
+            int n = stoi(command.substr(7));
+            if (!booking.cancelReservations(n))
+                cout << "Cannot perform this operation" << endl;
+        }
+        else {
+            cout << "Unknown command" << endl;
+        }
+    }
+
+    return 0;
+}
